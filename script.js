@@ -9,6 +9,7 @@ let firstNumber;
 let secondNumber;
 let currentOperation;
 let display = document.getElementById("display");
+let dotBtn = document.getElementById("dot");
 
 
 function add(num1, num2) {
@@ -60,30 +61,33 @@ numbers.forEach(number => {
 operatorsArray.forEach(operator => {
 	operator.addEventListener("click", function()
 	{
+		currentDisplay = "";
+		dotBtn.disabled = false;
+		let isEquals = operator.innerText.localeCompare("=");
+		if (isEquals)
+		{
+			currentOperation = operator.innerText;
+		}
 		if (firstNumber)
 		{
 			secondNumber = parseFloat(display.innerText);
 			let result = operate(firstNumber, secondNumber, currentOperation);
-			currentDisplay = "";
 			populateDisplay(result);
 			currentOperation = "";
 			currentDisplay = "";
-			firstNumber = "";
-			//firstNumber = result;
-			secondNumber = "";
+			firstNumber = parseFloat(result);
+			
 		}
 		else
 		{
-			if (operator.innerText.localeCompare("="))
+			if (isEquals)
 			{
 				firstNumber = parseFloat(display.innerText); 
-				currentOperation = operator.innerText;
-				currentDisplay = "";
 				populateDisplay(""); 
-				secondNumber = "";
 			}
 			
 		}
+		secondNumber = "";
 	})
 })
 
@@ -94,4 +98,10 @@ clearBtn.addEventListener("click", () =>
 	secondNumber = "";
 	currentDisplay = "";
 	populateDisplay("");
+});
+
+
+dotBtn.addEventListener("click", () =>
+{
+	dotBtn.disabled = true;
 });
