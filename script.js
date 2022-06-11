@@ -4,7 +4,6 @@ let operators = document.getElementById("operators");
 operators = operators.childNodes;
 let operatorsArray = Array.prototype.slice.call(operators);
 operatorsArray.push(document.getElementById("result"));
-console.log('operators :>> ', operatorsArray);
 let firstNumber;
 let secondNumber;
 let currentOperation;
@@ -39,7 +38,6 @@ function operate(num1, num2, operator) {
 		case "/":
 			if (num2 === 0)
 			{
-				console.log("????");
 				return "What are you doing??? Diving by 0 is impossible!";
 			}
 			
@@ -48,8 +46,17 @@ function operate(num1, num2, operator) {
 }
 
 function populateDisplay(num) {
-	currentDisplay += num;
-	display.innerText = currentDisplay;
+	if (num == "." && currentDisplay == "")
+	{
+		
+	}
+	else
+	{
+		currentDisplay += num;
+		display.innerText = currentDisplay;
+		if (num == ".")
+			dotBtn.disabled = true;
+	}
 }
 
 numbers.forEach(number => {
@@ -63,28 +70,38 @@ operatorsArray.forEach(operator => {
 	{
 		currentDisplay = "";
 		dotBtn.disabled = false;
-		let isEquals = operator.innerText.localeCompare("=");
-		if (isEquals)
+		let notEquals = !(operator.innerText == ("="));
+		if (notEquals)
 		{
 			currentOperation = operator.innerText;
 		}
-		if (firstNumber)
+		if (firstNumber && !(currentOperation == "="))
 		{
+			console.log('ENTER ');
 			secondNumber = parseFloat(display.innerText);
 			let result = operate(firstNumber, secondNumber, currentOperation);
 			populateDisplay(result);
-			currentOperation = "";
+			if (!notEquals)
+			{
+				currentOperation = "=";
+				firstNumber = ""
+			}
+			else
+				firstNumber = parseFloat(display.innerText);
 			currentDisplay = "";
-			firstNumber = parseFloat(result);
+			
 			
 		}
 		else
 		{
-			if (isEquals)
+			if (notEquals)
 			{
 				firstNumber = parseFloat(display.innerText); 
 				populateDisplay(""); 
 			}
+			else
+				firstNumber = "";
+
 			
 		}
 		secondNumber = "";
@@ -98,10 +115,4 @@ clearBtn.addEventListener("click", () =>
 	secondNumber = "";
 	currentDisplay = "";
 	populateDisplay("");
-});
-
-
-dotBtn.addEventListener("click", () =>
-{
-	dotBtn.disabled = true;
 });
