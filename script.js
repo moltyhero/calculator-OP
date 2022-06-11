@@ -71,10 +71,7 @@ operatorsArray.forEach(operator => {
 		currentDisplay = "";
 		dotBtn.disabled = false;
 		let notEquals = !(operator.innerText == ("="));
-		if (notEquals)
-		{
-			currentOperation = operator.innerText;
-		}
+		
 		if (firstNumber && !(currentOperation == "="))
 		{
 			console.log('ENTER ');
@@ -104,6 +101,10 @@ operatorsArray.forEach(operator => {
 
 			
 		}
+		if (notEquals)
+		{
+			currentOperation = operator.innerText;
+		}
 		secondNumber = "";
 	})
 })
@@ -124,3 +125,11 @@ backBtn.addEventListener("click", () =>
 	populateDisplay("");
 });
 
+// Add event listener on keyup
+document.addEventListener('keyup', (event) => {
+	var name = event.key;
+	var code = event.code;
+	// Alert the key name and key code on keydown
+	console.log(`Key pressed ${name} \r\n Key code value: ${code}`);
+	document.getElementsByName(name)[0].click();
+  }, false);
