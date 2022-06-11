@@ -116,3 +116,11 @@ clearBtn.addEventListener("click", () =>
 	currentDisplay = "";
 	populateDisplay("");
 });
+
+let backBtn = document.getElementById("back");
+backBtn.addEventListener("click", () =>
+{
+	currentDisplay = currentDisplay.slice(0, -1)
+	populateDisplay("");
+});
+

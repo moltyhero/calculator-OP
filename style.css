@@ -1,12 +1,39 @@
 .container {
   width: 100%;
   max-width: 960px;
+  max-height: 1200px;
+  border: 2px;
   margin: 0 auto;
-  
+  border-style: groove;
+  border-color: black;
 }
-.result
+
+.operators
 {
-    border-color: black;
-    
-    border: 1px solid;
+    background-color: aquamarine;
+}
+
+.number
+{
+    background-color: lightblue;
+}
+
+#result
+{
+    background-color: plum;
+}
+
+#display
+{
+    font-size: 40px;
+    background-color: lightgreen;
+    height: 50px;
+}
+
+button
+{
+    font-size: 30px;
+    background-color: lightgrey;
+    width: 100px;
+    height: 100px;
 }
